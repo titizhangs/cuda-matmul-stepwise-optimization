@@ -4,7 +4,7 @@
 **技术覆盖**：完整覆盖内存分层优化与全尺寸性能权衡 
 **工具链**：CUDA Toolkit、Nsight Compute、Compute Sanitizer、CMake
 # 项目概述
-本项目为矩阵优化项目（使用RTX5070ti消费级显卡），使用ncu分析优化方向，compute-sanitizer定位错误，从朴素矩阵逐级优化最终在达到了cublasSgemm性能的79%左右(4096*4096*4096无边界方阵乘法)
+本项目为矩阵优化项目（使用RTX5070ti消费级显卡），使用ncu分析优化方向，compute-sanitizer定位错误，从朴素矩阵逐级优化最终在达到了cublasSgemm性能的79%左右(4096 * 4096 * 4096无边界方阵乘法)
 # 核心优化点
 **全局内存层**
 - 行向 float4 向量化加载，对齐 128 字节缓存行，实现 Warp 级完美合并访问，打满内存带宽；
