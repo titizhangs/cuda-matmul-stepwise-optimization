@@ -1,0 +1,1 @@
+-D__CUDA_ARCH__=750 -D__CUDA_ARCH_LIST__=750 -nologo -c -TP  -DCUDA_DOUBLE_MATH_FUNCTIONS -EHsc "-ID:/NVIDIA/CUDA/v13.3/bin/../include" "-ID:/NVIDIA/CUDA/v13.3/bin/../include/cccl"     "D:\GitHub\cuda-matmul-stepwise-optimization\matmul_cuda\build\CMakeFiles\4.4.2\CompilerIdCUDA\tmp\CMakeCUDACompilerId.cudafe1.cpp" 

@@ -1,0 +1,1 @@
+-D__CUDA_ARCH_LIST__=750 -nologo "D:\GitHub\cuda-matmul-stepwise-optimization\matmul_cuda\build\CMakeFiles\4.4.2\CompilerIdCUDA\tmp\a_dlink.obj" "D:\GitHub\cuda-matmul-stepwise-optimization\matmul_cuda\build\CMakeFiles\4.4.2\CompilerIdCUDA\tmp\CMakeCUDACompilerId.obj" -link -INCREMENTAL:NO   "/LIBPATH:D:/NVIDIA/CUDA/v13.3/bin/../lib/x64"  cudadevrt.lib  cudart.lib

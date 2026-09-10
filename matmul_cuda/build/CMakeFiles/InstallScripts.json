@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/GitHub/cuda-matmul-stepwise-optimization/matmul_cuda/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

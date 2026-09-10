@@ -1,0 +1,61 @@
+CompileFlags:
+  CompilationDatabase: build          # 如果你用 CMake 生成了 build/compile_commands.json，clangd 会自动读取
+  Compiler: clangd
+  Add:
+    # —— 核心：告诉 clangd 这是 CUDA 文件，以及 CUDA 位置和架构 ——
+    - -xcuda
+    - --cuda-path=D:\NVIDIA\CUDA\v13.3
+    - --cuda-gpu-arch=sm_120          # ← RTX 5070 Ti 是 sm_120，Blackwell 架构
+    - -std=c++20
+    - -I D:\NVIDIA\CUDA\v13.3\include
+    # —— 让 clangd 理解 CUDA 关键字和宏 ——
+    - -D__CUDACC__
+    - -D__CUDA_ARCH__=1200            # 1200 = sm_120（注意是 1200，不是 120）
+    - -D__CUDACC_VER_MAJOR__=12
+    - -D__CUDACC_VER_MINOR__=8
+    - -D__INTELLISENSE__
+    - -D__CLANGD__
+
+    # —— 抑制已知误报 ——
+    - -Wno-unknown-cuda-version       # sm_120 很新，旧版 clang 会警告
+    - -Wno-invalid-constexpr
+    - -Wno-unknown-attributes
+    - -Wno-unneeded-internal-declaration
+    - -ferror-limit=0                  # 报告全部错误，不要提前截断
+
+  Remove:
+    # 剔除 nvcc 专有参数，clang 不认识
+    - -forward-unknown-to-host-compiler
+    - -ccbin*
+    - -Xcompiler*
+    - -Xfatbin*
+    - -Xptxas*
+    - --generate-code*
+    - -gencode*
+    - --expt-extended-lambda
+    - --expt-relaxed-constexpr
+    - -rdc=*
+    - --relocatable-device-code=*
+    - --options-file
+    - -Werror=cross-execution-space-call
+    # MSVC 专有参数（如果你项目混用 MSVC）
+    - /GR*
+    - /EHsc*
+    - /fp:*
+    - /W*
+    - /utf-8*
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true      # 函数调用处显示参数名，比如 foo(name: "abc")
+  DeducedTypes: true        # 显示 auto 推导出的类型，比如 auto x = 42; 显示为 int
+  Designators: true         # 聚合初始化时显示字段名
+  BlockEnd: true            # 块结束的 } 旁显示注释，标明属于哪个函数/作用域
+  DefaultArguments: false   # 默认参数不额外提示
+  TypeNameLimit: 24         # 类型名超过 24 字符就截断，避免太长
+
+Diagnostics:
+  ClangTidy:
+    Remove:
+      - modernize-use-trailing-return-type
+      - readability-identifier-naming
