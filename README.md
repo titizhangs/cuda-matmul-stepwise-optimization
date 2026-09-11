@@ -34,6 +34,8 @@
 # 最优版本核心代码片段
 [V13 最优版本核心代码](matmul_cuda/kernels/v13_matmul.cu)
 
+[V13 最优版本ncu最终版本报告](matmul_cuda/ncu-report/V13MatMul24.ncu-rep.gz)
+
 共享内存加载阶段  float4读写，线程任务划分坐标重定义(block单维)，同一warp完美合并访问，共享内存sA，sB存在4way冲突，经验证若为消冲突做转置会引入额外写指令与调度开销，整体性能负收益，因此保留当前方案，属于复杂度与性能的合理权衡。
 ```cuda
   for (int tileK = 0; tileK < (N + kTileK - 1) / kTileK; tileK++) {
